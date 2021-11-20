@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:13-alpine
+    env_file:
+      - ./.env.dev
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+  django:
+    container_name: TODO
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: bash "/usr/src/TODO/prestart.sh"
+    volumes:
+      - .:/usr/src/TODO/
+    env_file:
+      - ./.env.dev
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+volumes:
+  pg_data:

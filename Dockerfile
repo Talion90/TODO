@@ -1,0 +1,11 @@
+FROM python:3.10
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /usr/src/TODO
+COPY . /usr/src/TODO/
+
+RUN pip install -r /usr/src/TODO/requirements.txt
+
+EXPOSE 8000
